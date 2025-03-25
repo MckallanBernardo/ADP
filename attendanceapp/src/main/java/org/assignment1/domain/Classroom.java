@@ -2,20 +2,26 @@ package org.assignment1.domain;
 
 import java.util.ArrayList;
 
+/* Classroom.java
+Classroom model class
+Author: Mckallan Bernardo (219018243)
+Date: 18 March 2025
+*/
+
 public class Classroom {
     private String classroomID;
     private String className;
-    private String teacherName;
-    private ArrayList<Student> studentList;
+    private ArrayList <Teacher> teacher;
+    private ArrayList<Student> student;
 
     public Classroom() {
     }
 
-    public Classroom(String classroomID, String className, String teacherName, ArrayList<Student> studentList) {
+    public Classroom(String classroomID, String className, ArrayList<Teacher> teacher, ArrayList<Student> student) {
         this.classroomID = classroomID;
         this.className = className;
-        this.teacherName = teacherName;
-        this.studentList = studentList;
+        this.teacher = teacher;
+        this.student = student;
     }
 
     public String getClassroomID() {
@@ -26,12 +32,12 @@ public class Classroom {
         return className;
     }
 
-    public String getTeacherName() {
-        return teacherName;
+    public ArrayList<Teacher> getTeacher() {
+        return teacher;
     }
 
-    public ArrayList<Student> getStudentList() {
-        return studentList;
+    public ArrayList<Student> getStudent() {
+        return student;
     }
 
     @Override
@@ -39,16 +45,16 @@ public class Classroom {
         return "Classroom{" +
                 "classroomID='" + classroomID + '\'' +
                 ", className='" + className + '\'' +
-                ", teacherName='" + teacherName + '\'' +
-                ", studentList=" + studentList +
+                ", teacherName='" + teacher + '\'' +
+                ", studentList=" + student +
                 '}';
     }
 
 public static class ClassroomBuilder {
         private String classroomID;
         private String className;
-        private String teacherName;
-        private ArrayList<Student> studentList;
+        private ArrayList<Teacher> teacher;
+        private ArrayList<Student> student;
 
         public ClassroomBuilder setClassroomID(String classroomID) {
         this.classroomID = classroomID;
@@ -58,16 +64,16 @@ public static class ClassroomBuilder {
             this.className = className;
             return this;
         }
-        public ClassroomBuilder setTeacherName(String teacherName) {
-            this.teacherName = teacherName;
+        public ClassroomBuilder setTeacher(ArrayList<Teacher> teacher) {
+            this.teacher = teacher;
             return this;
         }
-        public ClassroomBuilder setStudentList(ArrayList<Student> studentList) {
-            this.studentList = studentList;
+        public ClassroomBuilder setStudent(ArrayList<Student> student) {
+            this.student = student;
             return this;
         }
         public Classroom build() {
-            return new Classroom(classroomID, className, teacherName, studentList);
+            return new Classroom(classroomID, className, teacher, student);
         }
 }
 }
