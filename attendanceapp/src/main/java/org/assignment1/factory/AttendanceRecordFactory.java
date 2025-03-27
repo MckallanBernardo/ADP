@@ -6,7 +6,7 @@ import org.assignment1.domain.Teacher;
 import org.assignment1.domain.AttendanceRecord;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.time.*;
 
 /* AttendanceRecordFactory.java
 Attendance Record Factory model class
@@ -15,15 +15,15 @@ Date: 26 March 2025
 */
 
 public class AttendanceRecordFactory {
-    public static AttendanceRecord createAttendanceRecord(String recordID, Date date, String status, ArrayList<Student> studentList,
-                                                         ArrayList<Teacher> teacherList, ArrayList<Classroom> classroomList){
+    public static AttendanceRecord createAttendanceRecord(String recordID, LocalDate date, String status, ArrayList<Student> student,
+                                                         ArrayList<Teacher> teacher, ArrayList<Classroom> classroom){
         return new AttendanceRecord.AttendanceRecordBuilder()
-                .setRecordID("")
-                .setDate()
-                .setStatus("")
-                .setStudent("")
-                .setTeacher("")
-                .setClassroom("")
+                .setRecordID(recordID)
+                .setDate(date)
+                .setStatus(status)
+                .setStudent(student)
+                .setTeacher(teacher)
+                .setClassroom(classroom)
                 .build();
     }
 }
