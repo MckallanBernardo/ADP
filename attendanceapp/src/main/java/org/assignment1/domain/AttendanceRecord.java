@@ -1,7 +1,10 @@
 package org.assignment1.domain;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
+import java.util.*;
+import java.time.*;
+
 
 /* AttendanceRecord.java
 Attendance Record model class
@@ -11,7 +14,7 @@ Date: 24 March 2025
 
 public class AttendanceRecord {
     private String recordID;
-    private Date date;
+    private LocalDate date;
     private String status;
     private ArrayList<Student> student;
     private ArrayList<Teacher> teacher;
@@ -28,7 +31,7 @@ public class AttendanceRecord {
     public String getRecordID(){
         return recordID;
     }
-    public Date getDate(){
+    public LocalDate getDate(){
         return date;
     }
     public String getStatus(){
@@ -52,7 +55,7 @@ public class AttendanceRecord {
 
     public static class AttendanceRecordBuilder{
         private String recordID;
-        private Date date;
+        private LocalDate date;
         private String status;
         private ArrayList<Student> student;
         private ArrayList<Teacher> teacher;
@@ -60,20 +63,20 @@ public class AttendanceRecord {
 
         public AttendanceRecordBuilder(){}
 
-        public AttendanceRecordBuilder(String recordID, Date date, String status, ArrayList<Student> student,
+        public AttendanceRecordBuilder(String recordID, LocalDate date, String status, ArrayList<Student> student,
                                        ArrayList<Teacher> teacher, ArrayList<Classroom> classroom){
-        this.recordID = recordID;
-        this.date = date;
-        this.status = status;
-        this.student = student;
-        this.teacher = teacher;
-        this.classroom = classroom;
+            this.recordID = recordID;
+            this.date = date;
+            this.status = status;
+            this.student = student;
+            this.teacher = teacher;
+            this.classroom = classroom;
         }
         public AttendanceRecordBuilder setRecordID(String recordID){
             this.recordID = recordID;
             return this;
         }
-        public AttendanceRecordBuilder setDate(Date date){
+        public AttendanceRecordBuilder setDate(LocalDate date){
             this.date = date;
             return this;
         }
