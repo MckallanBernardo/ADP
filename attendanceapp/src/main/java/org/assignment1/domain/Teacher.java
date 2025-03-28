@@ -13,7 +13,7 @@ public class Teacher {
     private String lastName;
     private String subject;
 
-    private Teacher() {
+    public Teacher() {
     }
 
     @Override
@@ -26,7 +26,7 @@ public class Teacher {
                 '}';
     }
 
-    private Teacher(String teacherID, String firstName, String lastName, String subject) {
+    public Teacher(String teacherID, String firstName, String lastName, String subject) {
         this.teacherID = teacherID;
         this.firstName = firstName;
         this.lastName = lastName;
