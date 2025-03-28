@@ -4,6 +4,8 @@ package org.assignment1.repository;
 import org.assignment1.domain.AttendanceRecord;
 import java.util.*;
 
+
+
 /* AttendanceRecordRepository.java
 AttendanceRecordRepository class
 Author: Ross Barth (220612986)
@@ -16,7 +18,7 @@ public class AttendanceRecordRepository implements IAttendanceRecordRepository {
 
     private List<AttendanceRecord> attendanceRecordList;
 
-    private AttendanceRecordRepository() {
+    AttendanceRecordRepository() {
         attendanceRecordList = new ArrayList<AttendanceRecord>();
     }
 
@@ -61,10 +63,10 @@ public class AttendanceRecordRepository implements IAttendanceRecordRepository {
     }
 
     @Override
-    public void delete(String s) {
-        AttendanceRecord attendanceRecordToDelete = read(s);
+    public boolean delete(String s) {
+        Optional<AttendanceRecord> attendanceRecordToDelete = findById(s);
         if (attendanceRecordToDelete == null)
-            return false;
-        return attendanceRecordToDelete();
+            return true;
+        return false;
     }
 }
