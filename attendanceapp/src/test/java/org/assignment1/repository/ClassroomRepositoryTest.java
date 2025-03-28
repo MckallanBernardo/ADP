@@ -75,9 +75,10 @@ class ClassroomRepositoryTest {
         ArrayList<Classroom> allClassrooms = classroomRepository.findAll();
 
         assertNotNull(allClassrooms, "The returned list should not be null");
-        assertEquals(2, allClassrooms.size(), "The list should contain 2 classrooms");
+        assertEquals(3, allClassrooms.size(), "The list should contain 3 classrooms");
         assertTrue(allClassrooms.contains(classroom1), "The list should contain classroom1");
         assertTrue(allClassrooms.contains(classroom2), "The list should contain classroom2");
+        assertTrue(allClassrooms.contains(classroom3), "The list should contain classroom3");
     }
 
     @Test
@@ -90,18 +91,16 @@ class ClassroomRepositoryTest {
 
         updatedClassroom = new Classroom.ClassroomBuilder()
                 .setClassroomID("C103")
-                .setClassName("Advanced Mathematics")  // Updated class name
+                .setClassName("Advanced Mathematics")
                 .setTeacher(new ArrayList<>(updatedTeachers))
                 .setStudent(new ArrayList<>(updatedStudents))
                 .build();
 
         Classroom returnedClassroom = classroomRepository.update(updatedClassroom);
 
-        // Assert: Check if the updated classroom is returned correctly
         assertNotNull(returnedClassroom, "The updated classroom should not be null");
         assertEquals(updatedClassroom, returnedClassroom, "The returned classroom should match the updated classroom");
 
-        // Verify that the classroom has been updated
         Optional<Classroom> foundClassroom = classroomRepository.findById("C101");
         assertTrue(foundClassroom.isPresent(), "The updated classroom should be found in the repository");
         assertEquals("Advanced Mathematics", foundClassroom.get().getClassName(), "The class name should be updated");
