@@ -8,6 +8,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/* AttendanceRecordTest.java
+Attendance Record Test model class
+Author: Ross Barth (220612986)
+Date: 27 March 2025
+*/
+
 public class AttendanceRecordTest {
 
 

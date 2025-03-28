@@ -13,6 +13,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/* AttendanceRecordFactoryTest.java
+Attendance Record Factory Test model class
+Author: Ross Barth (220612986)
+Date: 28 March 2025
+*/
+
 //@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class AttendanceRecordFactoryTest {
 

@@ -14,6 +14,12 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/* AttendanceRecordRepositoryTest.java
+Attendance Record Repository Test model class
+Author: Ross Barth (220612986)
+Date: 27 March 2025
+*/
+
 class AttendanceRecordRepositoryTest {
     private AttendanceRecordRepository attendanceRecordRepository;
     private AttendanceRecord attendanceRecord1, attendanceRecord2, attendanceRecord3;
