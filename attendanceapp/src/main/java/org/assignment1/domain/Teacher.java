@@ -2,7 +2,7 @@ package org.assignment1.domain;
 
 import java.lang.String;
 /* Teacher.java
-Teacher Interface
+Teacher class
 Author: Aidan Coetzee (230563724)
 Date: 27 March 2025
  */

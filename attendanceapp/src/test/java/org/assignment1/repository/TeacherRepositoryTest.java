@@ -8,6 +8,12 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/* TeacherRepositoryTest.java
+TeacherRepositoryTest class
+Author: Aidan Coetzee (230563724)
+Date: 27 March 2025
+ */
+
 class TeacherRepositoryTest {
 
     private TeacherRepository repository;

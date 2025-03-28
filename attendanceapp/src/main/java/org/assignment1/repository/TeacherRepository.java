@@ -6,6 +6,12 @@ import org.assignment1.domain.Teacher;
 import java.util.ArrayList;
 import java.util.Optional;
 
+/* TeacherRepository.java
+TeacherRepository class
+Author: Aidan Coetzee (230563724)
+Date: 27 March 2025
+ */
+
 public class TeacherRepository implements ITeacherRepository{
 
     private final ArrayList<Teacher> teachers = new ArrayList<Teacher>();

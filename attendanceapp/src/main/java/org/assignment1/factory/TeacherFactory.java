@@ -3,8 +3,8 @@ package org.assignment1.factory;
 import java.lang.String;
 import org.assignment1.domain.Teacher;
 
-/* TeacherFact.java
-TeacherFact Interface
+/* TeacherFactory.java
+TeacherFactory class
 Author: Aidan Coetzee (230563724)
 Date: 27 March 2025
  */

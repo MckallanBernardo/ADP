@@ -3,6 +3,11 @@ package org.assignment1.domain;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
+/* TeacherTest.java
+TeacherTest class
+Author: Aidan Coetzee (230563724)
+Date: 27 March 2025
+ */
 
 class TeacherTest {
 

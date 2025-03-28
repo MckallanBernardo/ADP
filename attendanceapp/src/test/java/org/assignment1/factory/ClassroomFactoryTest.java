@@ -13,24 +13,19 @@ class ClassroomFactoryTest {
 
     @Test
     void createClassroomTest(){
-        // Arrange - Creating sample teachers and students lists
         ArrayList<Teacher> teachers = new ArrayList<>();
-        teachers.add(new Teacher("T001", "John Doe"));
+        teachers.add(new Teacher("T001", "John", "Smith", "Physical Science"));
 
         ArrayList<Student> students = new ArrayList<>();
-        students.add(new Student("S001", "Jane Smith"));
+        students.add(new Student("S001", "Lizzy", "Mcguire", (2024, 3, 19));
 
-        // Act - Create a Classroom using the Factory
-        Classroom classroom = ClassroomFactory.createClassroom("101", "Math", teachers, students);
+        Classroom classroom = ClassroomFactory.createClassroom("C101", "T1.1", teachers, students);
 
-        // Assert - Validate that the classroom was created correctly
-        assertNotNull(classroom);
-        assertEquals("101", classroom.getClassroomID());
-        assertEquals("Math", classroom.getClassName());
-        assertEquals(1, classroom.getTeacher().size());
-        assertEquals(1, classroom.getStudent().size());
-        assertEquals("John Doe", classroom.getTeacher().get(0).getName());
-        assertEquals("Jane Smith", classroom.getStudent().get(0).getName());
+        assertNotNull(classroom, "Classroom should not be null");
+        assertEquals("C101", classroom.getClassroomID(), "Classroom ID should be 'C101'");
+        assertEquals("T1.1", classroom.getClassName(), "Classroom name should be 'T1.1'");
+        assertEquals(1, classroom.getTeacher().size(), "There should be 1 teacher in the classroom");
+        assertEquals(1, classroom.getStudent().size(), "There should be 1 student in the classroom");
     }
-    }
+
 }
