@@ -5,6 +5,7 @@ import org.assignment1.domain.Student;
 import org.assignment1.domain.Teacher;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -17,7 +18,7 @@ class ClassroomFactoryTest {
         teachers.add(new Teacher("T001", "John", "Smith", "Physical Science"));
 
         ArrayList<Student> students = new ArrayList<>();
-        students.add(new Student("S001", "Lizzy", "Mcguire", (2024, 3, 19));
+        students.add(new Student("S001", "Lizzy", "Mcguire", LocalDate.of(2024, 3, 19)));
 
         Classroom classroom = ClassroomFactory.createClassroom("C101", "T1.1", teachers, students);
 
