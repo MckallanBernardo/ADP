@@ -60,14 +60,14 @@ class TeacherRepositoryTest {
 
     @Test
     void testDelete() {
-        repository.delete("T002");
+        repository.delete("1777");
         assertEquals(1, repository.findAll().size());
-        assertFalse(repository.findById("T002").isPresent());
+        assertFalse(repository.findById("1777").isPresent());
     }
 
     @Test
     void testFindByTeacherName() {
-        assertEquals(1, repository.findByTeacherName("T001").size());
+        assertEquals(1, repository.findByTeacherName("0777").size());
     }
 
 }
