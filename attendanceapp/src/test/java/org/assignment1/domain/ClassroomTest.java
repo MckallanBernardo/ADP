@@ -24,7 +24,6 @@ class ClassroomTest {
     }
     @Test
     void getClassroomID() {
-        // Act: Retrieve the classroom ID
         String classroomID = classroom.getClassroomID();
 
         assertEquals("C101", classroomID, "The classroom ID should be C101");
