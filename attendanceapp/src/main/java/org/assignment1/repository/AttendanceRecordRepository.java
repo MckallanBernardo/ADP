@@ -2,8 +2,6 @@ package org.assignment1.repository;
 
 
 import org.assignment1.domain.AttendanceRecord;
-import org.assignment1.domain.Teacher;
-
 import java.util.*;
 
 /* AttendanceRecordRepository.java
@@ -67,6 +65,6 @@ public class AttendanceRecordRepository implements IAttendanceRecordRepository {
         AttendanceRecord attendanceRecordToDelete = read(s);
         if (attendanceRecordToDelete == null)
             return false;
-        return (attendanceRecordList.remove(attendanceRecordToDelete));
+        return attendanceRecordToDelete();
     }
 }
