@@ -1,6 +1,6 @@
 package org.assignment1.domain;
 
-import java.util.ArrayList;
+
 import java.util.*;
 import java.time.*;
 
@@ -19,6 +19,9 @@ public class AttendanceRecord {
     private ArrayList<Teacher> teacher;
     private ArrayList<Classroom> classroom;
 
+    public AttendanceRecord() {
+
+    }
     private AttendanceRecord(AttendanceRecordBuilder builder) {
         this.recordID = builder.recordID;
         this.date = builder.date;
