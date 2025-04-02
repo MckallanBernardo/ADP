@@ -19,7 +19,7 @@ Author: Ross Barth (220612986)
 Date: 28 March 2025
 */
 
-//@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class AttendanceRecordFactoryTest {
 
 

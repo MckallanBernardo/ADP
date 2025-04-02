@@ -63,10 +63,8 @@ public class AttendanceRecordRepository implements IAttendanceRecordRepository {
     }
 
     @Override
-    public boolean delete(String s) {
+    public void delete(String s) {
         Optional<AttendanceRecord> attendanceRecordToDelete = findById(s);
-        if (attendanceRecordToDelete == null)
-            return true;
-        return false;
+        //if (attendanceRecordToDelete == null);
     }
 }
