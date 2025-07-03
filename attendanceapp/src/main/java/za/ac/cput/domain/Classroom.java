@@ -1,15 +1,25 @@
 package za.ac.cput.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class Classroom {
     @Id
     private String classroomId;
     private String className;
+    @OneToOne
+    @JoinColumn(name = "teacher_teacher_id") //come back to this later
     private Teacher teacher;
+    @OneToMany
+    @JoinColumn(name = "classroom_id") //come back to this later
     private List<Student> student;
+
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
+    }
 
     protected Classroom() {
     }

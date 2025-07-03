@@ -5,6 +5,8 @@ import za.ac.cput.domain.Student;
 import za.ac.cput.domain.Teacher;
 import za.ac.cput.util.Helper;
 
+import java.util.List;
+
 public class ClassroomFactory {
     public Classroom createClassroom(String classroomId, String className,
                                      Teacher teacher, List<Student> student){
