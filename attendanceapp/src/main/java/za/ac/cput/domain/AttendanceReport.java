@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
+
 @Entity
 public class AttendanceReport {
 
