@@ -4,9 +4,9 @@ import java.util.List;
 
 public interface IService <T, ID> {
     T create(T entity);
-    T read(String id);
+    T read(ID id);
     T update(T entity);
-    void delete(String id);
+    void delete(ID id);
     List<T> getAll();
     T findById(String id);
 }
