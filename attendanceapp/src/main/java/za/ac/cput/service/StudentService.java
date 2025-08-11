@@ -7,12 +7,12 @@ import za.ac.cput.repository.IStudentRepository;
 
 import java.util.List;
 @Service
-public class StudentServiceImpl implements IStudentService {
+public class StudentService implements IStudentService {
 
     private final IStudentRepository repository;
 
     @Autowired
-    public StudentServiceImpl(IStudentRepository repository) {
+    public StudentService(IStudentRepository repository) {
         this.repository = repository;
     }
 

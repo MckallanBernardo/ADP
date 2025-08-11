@@ -4,14 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import za.ac.cput.domain.Student;
 import java.util.List;
-import za.ac.cput.service.StudentServiceImpl;
+import za.ac.cput.service.StudentService;
 
    @RestController
    @RequestMapping("/attendanceapp/students")
    public class StudentController {
 
        @Autowired
-       private StudentServiceImpl studentService;
+       private StudentService studentService;
 
        @PostMapping ("/create")
        public Student createStudent(@RequestBody Student student) {
