@@ -32,9 +32,9 @@ public class StudentService implements IStudentService {
     }
 
     @Override
-    public boolean delete(String id) {
+    public void delete(String id) {
         this.repository.deleteById(id);
-        return true;
+
     }
 
     @Override
