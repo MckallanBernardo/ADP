@@ -79,6 +79,7 @@ class ClassroomServiceTest {
         Classroom updated = service.update
                 (new Classroom.Builder().copy(created).setClassName("102").build());
         assertNotNull(updated);
+        assertEquals("102", updated.getClassName());
     }
 
     @Test
@@ -90,10 +91,16 @@ class ClassroomServiceTest {
 
     @Test
     void getAll() {
-
+        service.create(classroom);
+        List<Classroom> classrooms = service.getAll();
+        assertNotNull(classrooms);
+        assertFalse(classrooms.isEmpty());
     }
 
     @Test
     void findById() {
+        Classroom created = service.create(classroom);
+        Classroom found = service.findById(created.getClassroomId());
+        assertNotNull(found);
     }
 }
