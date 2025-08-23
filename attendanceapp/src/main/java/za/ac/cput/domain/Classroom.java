@@ -16,11 +16,6 @@ public class Classroom {
     @JoinColumn(name = "classroom_id") //come back to this later
     private List<Student> student;
 
-
-    public void setTeacher(Teacher teacher) {
-        this.teacher = teacher;
-    }
-
     protected Classroom() {
     }
     private Classroom(Builder builder){

@@ -1,5 +1,6 @@
 package za.ac.cput.domain;
 
+import com.mysql.cj.x.protobuf.MysqlxDatatypes;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
