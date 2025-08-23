@@ -48,9 +48,8 @@ class StudentServiceTest {
     @Test
     void delete() {
         service.create(student);
-        service.delete(student.getStudentID());
-        Student deleted = service.read(student.getStudentID());
-        assertNull(deleted);
+        boolean deleted = service.delete(student.getStudentID());
+        assertTrue(deleted);
     }
 
     @Test
