@@ -1,66 +1,80 @@
 package za.ac.cput.service;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import za.ac.cput.domain.Student;
 import za.ac.cput.repository.IStudentRepository;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 
-@SpringBootTest
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
+
+@ExtendWith(MockitoExtension.class)
 class StudentServiceTest {
 
-    @Autowired
-    private StudentService service;
+    @Mock
+    private IStudentRepository studentRepository;
 
-    @Autowired
-    private IStudentRepository repository;
+    @InjectMocks
+    private StudentService studentService;
 
-    private final Student student = new Student.Builder()
-            .setStudentID("S1")
-            .setFirstName("Alice")
-            .setLastName("Smith")
-            .build();
+    private Student student;
 
-    @Test
-    void create() {
-        Student created = service.create(student);
-        assertNotNull(created);
+    @BeforeEach
+    void setUp() {
+        student = new Student.Builder()
+                .setStudentID("S1")
+                .setFirstName("Alice")
+                .setLastName("Smith")
+                .build();
     }
 
     @Test
-    void read() {
-        service.create(student);
-        Student read = service.read(student.getStudentID());
-        assertNotNull(read);
+    void createStudent() {
+        when(studentRepository.save(any(Student.class))).thenReturn(student);
+        Student created = studentService.create(student);
+        assertThat(created).isNotNull();
+        assertThat(created.getStudentID()).isEqualTo("S1");
     }
 
     @Test
-    void update() {
-        service.create(student);
-        Student updated = service.update(
-                new Student.Builder().copy(student).setFirstName("Alicia").build());
-        assertNotNull(updated);
-        assertEquals("Alicia", updated.getFirstName());
+    void readStudent() {
+        when(studentRepository.findById("S1")).thenReturn(Optional.of(student));
+        Student found = studentService.read("S1");
+        assertThat(found).isNotNull();
+        assertThat(found.getFirstName()).isEqualTo("Alice");
     }
 
     @Test
-    void delete() {
-        service.create(student);
-        boolean deleted = service.delete(student.getStudentID());
-        assertTrue(deleted);
+    void updateStudent() {
+        when(studentRepository.save(any(Student.class))).thenReturn(student);
+        Student updated = studentService.update(student);
+        assertThat(updated).isNotNull();
+        assertThat(updated.getStudentID()).isEqualTo("S1");
     }
 
     @Test
-    void getAll() {
-        service.create(student);
-        assertFalse(service.getAll().isEmpty());
+    void deleteStudent() {
+        doNothing().when(studentRepository).deleteById("S1");
+        boolean deleted = studentService.delete("S1");
+        assertThat(deleted).isTrue();
+        verify(studentRepository, times(1)).deleteById("S1");
     }
 
     @Test
-    void findById() {
-        service.create(student);
-        Student found = service.findById(student.getStudentID());
+    void getAllStudents() {
+        List<Student> students = Arrays.asList(student);
+        when(studentRepository.findAll()).thenReturn(students);
+        List<Student> result = studentService.getAll();
+        assertThat(result).hasSize(1);
+        assertThat(result.get(0).getStudentID()).isEqualTo("S1");
     }
 }
