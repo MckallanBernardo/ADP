@@ -1,15 +1,29 @@
 package za.ac.cput.domain;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+
 import java.time.LocalDate;
 
+@Entity
 public class AttendanceRecord {
+    @Id
     private String recordID;
 
     private LocalDate date;
 
     private String status;
 
+
+    @OneToOne
+    @JoinColumn(name = "classroom_classroom_id")
     private Classroom classroom;
+
+    public void setClassroom(Classroom classroom) {
+        this.classroom = classroom;
+    }
 
 
     protected AttendanceRecord(){

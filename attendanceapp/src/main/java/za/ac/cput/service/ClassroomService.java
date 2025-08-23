@@ -34,9 +34,11 @@ public class ClassroomService implements IClassroomService{
     }
 
     @Override
-    public void delete(String id) {
+    public boolean delete(String id) {
         this.repository.deleteById(id);
+        return true;
     }
+
 
     @Override
     public List<Classroom> getAll() {
