@@ -10,10 +10,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/attendanceapp/classrooms")
 public class ClassroomController {
-    // The ClassroomController will handle HTTP requests related to Classroom entities.
-    // It will use ClassroomService to perform CRUD operations on Classroom objects.
-    // Methods for creating, reading, updating, and deleting classrooms will be added here.
-    // For now, this class is a placeholder and can be expanded later with actual methods.
 
     private ClassroomService service;
 
