@@ -17,12 +17,12 @@ public class AttendanceRecordController {
         this.service = service;
     }
 
-    @PostMapping("create")
+    @PostMapping("/create")
     public AttendanceRecord create(@RequestBody AttendanceRecord attendanceRecord){
         return service.create(attendanceRecord);
     }
 
-    @GetMapping("read{id}")
+    @GetMapping("/read/{id}")
     public AttendanceRecord read(@PathVariable String id){
         return service.read(id);
     }
@@ -30,6 +30,13 @@ public class AttendanceRecordController {
     @PutMapping("/update")
     public AttendanceRecord update(@RequestBody AttendanceRecord attendanceRecord){
         return service.update(attendanceRecord);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public boolean delete(@PathVariable String id){
+        if (service.delete(id))
+            return false;
+        return true;
     }
 
     @GetMapping("/getAll")

@@ -80,6 +80,14 @@ public class AttendanceRecord {
             return this;
         }
 
+        public Builder copy(AttendanceRecord attendanceRecord){
+            this.recordID = attendanceRecord.recordID;
+            this.date = attendanceRecord.date;
+            this.status = attendanceRecord.status;
+            this.classroom = attendanceRecord.classroom;
+            return this;
+        }
+
         public AttendanceRecord build(){
             return new AttendanceRecord(this);
         }

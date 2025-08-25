@@ -43,20 +43,25 @@ public class AttendanceRecordService implements IAttendanceRecordService{
     }
 
     /// #NOTE: complete findByEntity, same as findById
-    @Override
-    public List<AttendanceRecord> findByAttendanceRecord() {
-        List<AttendanceRecord> attRecordList = new ArrayList<>();
-        attRecordList.add(attendRecordRepo);
-        for (AttendanceRecord E:attRecordList){
-
-        }
-        return attRecordList;
-    }
+//    @Override
+//    public List<AttendanceRecord> findByAttendanceRecord() {
+//        List<AttendanceRecord> attRecordList = new ArrayList<>();
+//        attRecordList.add(attendRecordRepo);
+//        for (AttendanceRecord E:attRecordList){
+//
+//        }
+//        return attRecordList;
+//    }
 
 
     @Override
     public List<AttendanceRecord> getAll() {
         return attendRecordRepo.findAll();
+    }
+
+    @Override
+    public AttendanceRecord findById(String id) {
+        return null;
     }
 
     ///  #NOTE: complete findById, using for-each loop
