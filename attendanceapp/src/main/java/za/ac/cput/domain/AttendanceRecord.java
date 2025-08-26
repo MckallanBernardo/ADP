@@ -1,19 +1,20 @@
 package za.ac.cput.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
 @Entity
+@Table(name = "attendancerecord")
 public class AttendanceRecord {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private String recordID;
 
+    @Column(name = "date")
     private LocalDate date;
 
+    @Column(name = "status")
     private String status;
 
 
@@ -76,6 +77,14 @@ public class AttendanceRecord {
 
         public Builder setClassroom(Classroom classroom){
             this.classroom = classroom;
+            return this;
+        }
+
+        public Builder copy(AttendanceRecord attendanceRecord){
+            this.recordID = attendanceRecord.recordID;
+            this.date = attendanceRecord.date;
+            this.status = attendanceRecord.status;
+            this.classroom = attendanceRecord.classroom;
             return this;
         }
 
