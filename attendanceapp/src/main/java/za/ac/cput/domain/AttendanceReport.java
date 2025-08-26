@@ -5,6 +5,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 
@@ -83,10 +84,11 @@ public class AttendanceReport {
             return this;
         }
 
-        public Builder setRecords(ArrayList<AttendanceRecord> records) {
-            this.records = records;
+        public Builder setRecords(List<AttendanceRecord> records) {
+            this.records = new ArrayList<>(records); // store as ArrayList internally
             return this;
         }
+
 
         public Builder setStartDate(LocalDate startDate) {
             this.startDate = startDate;
