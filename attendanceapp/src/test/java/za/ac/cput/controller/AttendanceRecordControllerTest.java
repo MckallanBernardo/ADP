@@ -26,13 +26,10 @@ import static org.junit.jupiter.api.Assertions.*;
 class AttendanceRecordControllerTest {
 
     private static AttendanceRecord attendanceRecord;
-
     private static Classroom classroom;
-
     private static Teacher teacher;
-
     private static Student student;
-
+    private static ArrayList<Student> students = new ArrayList<>();
     static LocalDate dateToday = LocalDate.now();
 
     private TestRestTemplate restTemplate;
@@ -41,6 +38,13 @@ class AttendanceRecordControllerTest {
 
     @BeforeAll
     public static void setUp() {
+        students.add(student);
+        student = new Student.Builder().copy(student)
+                .setStudentID("STU001")
+                .setFirstName("Billy")
+                .setLastName("Jean")
+                .build();
+
         teacher = new Teacher.Builder().copy(teacher)
                 .setTeacherID("JD001")
                 .setFirstName("JOHN")
@@ -48,17 +52,12 @@ class AttendanceRecordControllerTest {
                 .setSubject("Pimping")
                 .build();
 
-        student = new Student.Builder().copy(student)
-                .setStudentID("STU001")
-                .setFirstName("Billy")
-                .setLastName("Jean")
-                .build();
 
         classroom = new Classroom.Builder().copy(classroom)
                 .setClassroomId("CLASS001")
                 .setClassName("Pimping 101")
                 .setTeacher(teacher)
-                .setStudent()
+                .setStudent(students)
                 .build();
 
         attendanceRecord = new AttendanceRecord.Builder().copy(attendanceRecord)
@@ -131,9 +130,9 @@ class AttendanceRecordControllerTest {
         ResponseEntity<AttendanceRecord> response = restTemplate.getForEntity(url, AttendanceRecord.class);
         assertNotNull(response.getBody());
         // assertTrue(response.getBody().length > 0);
-        System.out.println("Get All: ");
-        for (AttendanceRecord atr : response.getBody()) {
-            System.out.println(atr);
-        }
+        System.out.println("Get All: " + response.getBody());
+        //for (AttendanceRecord atr : response.getBody()) {
+          //  System.out.println(atr);
+        //}
     }
 }

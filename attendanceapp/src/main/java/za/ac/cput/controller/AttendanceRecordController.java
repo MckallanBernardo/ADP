@@ -44,11 +44,5 @@ public class AttendanceRecordController {
         return service.getAll();
     }
 
-///    #NOTE: I HAVE TO GET TO THE DELETE
-//    @DeleteMapping("/delete")
-//    public boolean delete(@PathVariable String id){
-//        if (service.delete(id))
-//            return false;
-//        return false;
-//    }
+
 }
