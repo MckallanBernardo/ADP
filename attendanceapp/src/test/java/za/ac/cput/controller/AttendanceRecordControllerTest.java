@@ -56,8 +56,6 @@ class AttendanceRecordControllerTest {
         classroom = new Classroom.Builder().copy(classroom)
                 .setClassroomId("CLASS001")
                 .setClassName("Pimping 101")
-                .setTeacher(teacher)
-                .setStudent(students)
                 .build();
 
         attendanceRecord = new AttendanceRecord.Builder().copy(attendanceRecord)

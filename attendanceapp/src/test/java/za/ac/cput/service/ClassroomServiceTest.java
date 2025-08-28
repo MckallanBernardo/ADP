@@ -28,36 +28,16 @@ class ClassroomServiceTest {
 
     @Autowired
     private IClassroomRepository classroomRepository;
-    @Autowired
-    private ITeacherRepository teacherRepository;
-    @Autowired
-    private IStudentRepository studentRepository;
 
-    private Teacher teacher;
-    private Student student1;
-    private List<Student> students;
     private Classroom classroom;
 
     @BeforeEach
     void setUp() {
         classroomRepository.deleteAll();
-        teacherRepository.deleteAll();
-        studentRepository.deleteAll();
-
-        teacher = TeacherFactory.createTeacher("T001", "John", "Doe", "Mathematics");
-        teacherRepository.save(teacher);
-
-        student1 = StudentFactory.createStudent("S001", "Jane", "Smith");
-        studentRepository.save(student1);
-
-        students = new ArrayList<>();
-        students.add(student1);
 
         classroom = new Classroom.Builder()
                 .setClassroomId("C1")
                 .setClassName("101")
-                .setTeacher(teacher)
-                .setStudent(students)
                 .build();
     }
     @Test

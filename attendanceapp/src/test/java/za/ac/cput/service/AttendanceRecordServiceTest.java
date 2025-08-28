@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import za.ac.cput.domain.AttendanceRecord;
 import za.ac.cput.domain.Classroom;
+import za.ac.cput.domain.Student;
+import za.ac.cput.domain.Teacher;
 import za.ac.cput.factory.AttendanceRecordFactory;
 import za.ac.cput.factory.ClassroomFactory;
 
@@ -23,7 +25,22 @@ public class AttendanceRecordServiceTest {
             .setClassName("Maths")
             .build();
 
-    private AttendanceRecord attendanceRecord = AttendanceRecordFactory.createAttendanceRecord("2300123", dateVar, "Present", classroom);
+    private Teacher teacher = new Teacher.Builder()
+            .setTeacherID("TEA12345")
+            .setFirstName("John")
+            .setLastName("Doe")
+            .setSubject("Mathematics")
+            .build();
+
+    private Student student = new Student.Builder()
+            .setStudentID("STU67890")
+            .setFirstName("Jane")
+            .setLastName("Smith")
+            .build();
+
+    private AttendanceRecord attendanceRecord = AttendanceRecordFactory.createAttendanceRecord(
+            "2300123", LocalDate.now(), "Present",
+            classroom, student, teacher);
 
     @Test
     void create(){

@@ -17,18 +17,19 @@ public class AttendanceRecord {
     @Column(name = "status")
     private String status;
 
+    @ManyToOne //lol
+    @JoinColumn(name = "student_student_id")
+    private Student student;
 
     @OneToOne
     @JoinColumn(name = "classroom_classroom_id")
     private Classroom classroom;
 
-    public void setClassroom(Classroom classroom) {
-        this.classroom = classroom;
-    }
-
+    @ManyToOne
+    @JoinColumn(name = "teacher_teacher_id")
+    private Teacher teacher;
 
     protected AttendanceRecord(){
-
     }
 
     private AttendanceRecord(Builder builder){
@@ -36,6 +37,12 @@ public class AttendanceRecord {
         this.date = builder.date;
         this.status = builder.status;
         this.classroom = builder.classroom;
+        this.student = builder.student;
+        this.teacher = builder.teacher;
+    }
+
+    public Student getStudent() {
+        return student;
     }
 
     public String getRecordID(){
@@ -54,11 +61,29 @@ public class AttendanceRecord {
         return classroom;
     }
 
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    @Override
+    public String toString() {
+        return "AttendanceRecord{" +
+                "recordID='" + recordID + '\'' +
+                ", date=" + date +
+                ", status='" + status + '\'' +
+                ", student=" + student +
+                ", classroom=" + classroom +
+                ", teacher=" + teacher +
+                '}';
+    }
+
     public static class Builder{
         private String recordID;
         private LocalDate date;
         private String status;
         private Classroom classroom;
+        private Student student;
+        private Teacher teacher;
 
         public Builder setRecordID(String recordID){
             this.recordID = recordID;
@@ -80,11 +105,22 @@ public class AttendanceRecord {
             return this;
         }
 
+        public Builder setStudent(Student student){
+            this.student = student;
+            return this;
+        }
+
+        public Builder setTeacher(Teacher teacher){
+            this.teacher = teacher;
+            return this;
+        }
+
         public Builder copy(AttendanceRecord attendanceRecord){
             this.recordID = attendanceRecord.recordID;
             this.date = attendanceRecord.date;
             this.status = attendanceRecord.status;
             this.classroom = attendanceRecord.classroom;
+            this.student = attendanceRecord.student;
             return this;
         }
 

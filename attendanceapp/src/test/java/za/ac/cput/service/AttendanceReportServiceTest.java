@@ -4,9 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import za.ac.cput.domain.AttendanceRecord;
-import za.ac.cput.domain.AttendanceReport;
-import za.ac.cput.domain.Classroom;
+import za.ac.cput.domain.*;
 import za.ac.cput.factory.AttendanceRecordFactory;
 
 import java.time.LocalDate;
@@ -22,6 +20,8 @@ class AttendanceReportServiceTest {
     private AttendanceReportService service;
 
     private Classroom classroom;
+    private Student student;
+    private Teacher teacher;
     private AttendanceReport report;
 
     @BeforeEach
@@ -31,9 +31,27 @@ class AttendanceReportServiceTest {
                 .setClassName("101")
                 .build();
 
+        student = new Student.Builder()
+                .setStudentID("S001")
+                .setFirstName("John")
+                .setLastName("Doe")
+                .build();
+
+        teacher = new Teacher.Builder()
+                .setTeacherID("T001")
+                .setFirstName("Jane")
+                .setLastName("Smith")
+                .setSubject("Math")
+                .build();
+
         List<AttendanceRecord> records = new ArrayList<>();
-        records.add(AttendanceRecordFactory.createAttendanceRecord("R001", LocalDate.now(), "Present", classroom));
-        records.add(AttendanceRecordFactory.createAttendanceRecord("R002", LocalDate.now(), "Absent", classroom));
+        records.add(AttendanceRecordFactory.createAttendanceRecord(
+                "R001", LocalDate.now(), "Present",
+                classroom, student, teacher));
+
+        records.add(AttendanceRecordFactory.createAttendanceRecord(
+                "R002", LocalDate.now(), "Absent",
+                classroom, student, teacher));
 
         report = new AttendanceReport.Builder()
                 .setReportID("AR001")

@@ -1,18 +1,19 @@
 package za.ac.cput.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import za.ac.cput.domain.Teacher;
 
 
 @Entity
 public class AttendanceReport {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private String reportID;
 
     @OneToMany
@@ -62,6 +63,7 @@ public class AttendanceReport {
         for (AttendanceRecord record : records) {
             System.out.println(record.toString());
         }
+
     }
 
     // Getters

@@ -3,6 +3,8 @@ package za.ac.cput.factory;
 
 import za.ac.cput.domain.AttendanceRecord;
 import za.ac.cput.domain.Classroom;
+import za.ac.cput.domain.Student;
+import za.ac.cput.domain.Teacher;
 import za.ac.cput.util.Helper;
 
 import java.time.LocalDate;
@@ -12,7 +14,9 @@ public class AttendanceRecordFactory {
              String recordID,
              LocalDate date,
              String status,
-             Classroom classroom
+             Classroom classroom,
+             Student student,
+             Teacher teacher
      ){
           if(
                   Helper.isNullOrEmpty(recordID) ||   date == null   ||   Helper.isNullOrEmpty(status) ||   classroom == null
@@ -23,6 +27,8 @@ public class AttendanceRecordFactory {
                   .setDate(date)
                   .setStatus(status)
                   .setClassroom(classroom)
+                  .setStudent(student)
+                  .setTeacher(teacher)
                   .build();
      }
 }

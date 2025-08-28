@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 @Entity
 public class Student {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private String studentID;
     private String firstName;
     private String lastName;

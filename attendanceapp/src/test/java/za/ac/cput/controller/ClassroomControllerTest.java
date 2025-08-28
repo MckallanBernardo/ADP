@@ -46,8 +46,6 @@ class ClassroomControllerTest {
         classroom = new Classroom.Builder()
                 .setClassroomId("C1")
                 .setClassName("101")
-                .setTeacher(teacher)
-                .setStudent(students)
                 .build();
     }
 
