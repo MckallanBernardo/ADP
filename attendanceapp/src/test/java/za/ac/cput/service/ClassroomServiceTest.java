@@ -5,17 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import za.ac.cput.domain.Classroom;
-import za.ac.cput.domain.Student;
-import za.ac.cput.domain.Teacher;
-import za.ac.cput.factory.ClassroomFactory;
-import za.ac.cput.factory.StudentFactory;
-import za.ac.cput.factory.TeacherFactory;
 import za.ac.cput.repository.IClassroomRepository;
-import za.ac.cput.repository.IStudentRepository;
-import za.ac.cput.repository.ITeacherRepository;
-
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
