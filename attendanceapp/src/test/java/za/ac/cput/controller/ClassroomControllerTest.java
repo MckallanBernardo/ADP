@@ -37,11 +37,11 @@ class ClassroomControllerTest {
     void setUp() {
         baseUrl = "http://localhost:" + port + "/attendanceapp/classrooms";
 
-        teacher = TeacherFactory.createTeacher("T001", "John", "Doe", "Mathematics");
-        student1 = StudentFactory.createStudent("S001", "Jane", "Smith");
-
-        students = new ArrayList<>();
-        students.add(student1);
+//        teacher = TeacherFactory.createTeacher("T001", "John", "Doe", "Mathematics");
+//        student1 = StudentFactory.createStudent("S001", "Jane", "Smith");
+//
+//        students = new ArrayList<>();
+//        students.add(student1);
 
         classroom = new Classroom.Builder()
                 .setClassroomId("C1")

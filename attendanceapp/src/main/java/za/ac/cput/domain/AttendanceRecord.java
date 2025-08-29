@@ -8,7 +8,7 @@ import java.time.LocalDate;
 @Table(name = "attendancerecord")
 public class AttendanceRecord {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @GeneratedValue(strategy = GenerationType.AUTO)
     private String recordID;
 
     @Column(name = "date")
@@ -121,6 +121,7 @@ public class AttendanceRecord {
             this.status = attendanceRecord.status;
             this.classroom = attendanceRecord.classroom;
             this.student = attendanceRecord.student;
+            this.teacher = attendanceRecord.teacher;
             return this;
         }
 

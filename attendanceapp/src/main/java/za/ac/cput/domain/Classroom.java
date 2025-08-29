@@ -7,7 +7,7 @@ import java.util.List;
 @Entity
 public class Classroom {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO) //check later
+//    @GeneratedValue(strategy = GenerationType.AUTO) //check later
     private String classroomId;
     private String className;
 //    @OneToOne

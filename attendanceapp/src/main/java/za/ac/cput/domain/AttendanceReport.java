@@ -13,7 +13,7 @@ import za.ac.cput.domain.Teacher;
 public class AttendanceReport {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @GeneratedValue(strategy = GenerationType.AUTO)
     private String reportID;
 
     @OneToMany

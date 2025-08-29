@@ -9,7 +9,7 @@ import jakarta.persistence.Id;
 @Entity
 public class Teacher {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @GeneratedValue(strategy = GenerationType.AUTO)
     private String teacherID;
     private String firstName;
     private String lastName;
