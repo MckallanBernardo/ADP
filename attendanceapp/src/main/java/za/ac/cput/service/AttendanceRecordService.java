@@ -9,14 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class AttendanceRecordService implements IAttendanceRecordService{
+public class AttendanceRecordService implements IAttendanceRecordService {
 
-    private static IAttendanceRecordRepository attendRecordRepo;
+    private final IAttendanceRecordRepository attendRecordRepo;
 
     //private static IAttendanceRecordService service;
 
     @Autowired
-    public AttendanceRecordService(IAttendanceRecordRepository attendRecordRepo){
+    public AttendanceRecordService(IAttendanceRecordRepository attendRecordRepo) {
         this.attendRecordRepo = attendRecordRepo;
     }
 
@@ -38,7 +38,7 @@ public class AttendanceRecordService implements IAttendanceRecordService{
 
     @Override
     public boolean delete(String id) {
-        if (attendRecordRepo.existsById(id));
+        if (attendRecordRepo.existsById(id)) ;
         return true;
     }
 
@@ -52,8 +52,6 @@ public class AttendanceRecordService implements IAttendanceRecordService{
 //        }
 //        return attRecordList;
 //    }
-
-
     @Override
     public List<AttendanceRecord> getAll() {
         return attendRecordRepo.findAll();
@@ -61,7 +59,7 @@ public class AttendanceRecordService implements IAttendanceRecordService{
 
     @Override
     public AttendanceRecord findById(String id) {
-        return null;
+        return attendRecordRepo.findById(id).orElse(null);
     }
 
     ///  #NOTE: complete findById, using for-each loop
@@ -69,4 +67,16 @@ public class AttendanceRecordService implements IAttendanceRecordService{
 //    public AttendanceRecord findById(String id) {
 //        return null;
 //    }
+    public java.util.List<AttendanceRecord> findByStudentAndDateRange(String studentId, java.time.LocalDate start, java.time.LocalDate end) {
+        if (start == null && end == null) {
+            return attendRecordRepo.findByStudent_StudentID(studentId);
+        }
+        if (start == null) {
+            start = java.time.LocalDate.MIN;
+        }
+        if (end == null) {
+            end = java.time.LocalDate.MAX;
+        }
+        return attendRecordRepo.findByStudent_StudentIDAndDateBetween(studentId, start, end);
+    }
 }

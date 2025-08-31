@@ -8,7 +8,7 @@ import za.ac.cput.util.Helper;
 import java.util.List;
 
 public class ClassroomFactory {
-    public Classroom createClassroom(String classroomId, String className){
+    public static Classroom createClassroom(String classroomId, String className){
         if (Helper.isNullOrEmpty(classroomId))
             return null;
         if (Helper.isNullOrEmpty(className))

@@ -21,7 +21,7 @@ public class AttendanceRecord {
     @JoinColumn(name = "student_student_id")
     private Student student;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "classroom_classroom_id")
     private Classroom classroom;
 
