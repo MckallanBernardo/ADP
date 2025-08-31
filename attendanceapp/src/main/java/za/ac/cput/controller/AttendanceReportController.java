@@ -48,8 +48,9 @@ public class AttendanceReportController {
         return ResponseEntity.notFound().build();
     }
 
-    @GetMapping("/all")
+    @GetMapping("/getAll")
     public ResponseEntity<List<AttendanceReport>> getAll() {
-        return ResponseEntity.ok(service.getAll());
+        List<AttendanceReport> reports = service.getAll();
+        return ResponseEntity.ok(reports);
     }
 }

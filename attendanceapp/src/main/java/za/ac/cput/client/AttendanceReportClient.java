@@ -8,29 +8,31 @@ import java.util.Arrays;
 import java.util.List;
 
 public class AttendanceReportClient {
+    // ✅ Fixed to match controller path
     private static final String BASE_URL = "http://localhost:8080/api/attendance-reports";
-    private final RestTemplate restTemplate = new RestTemplate();
+    private final RestTemplate restTemplate;
 
+    public AttendanceReportClient() {
+        this.restTemplate = new RestTemplate();
+    }
+
+    // Create
     public AttendanceReport create(AttendanceReport report) {
-        return restTemplate.postForObject(BASE_URL + "/create", report, AttendanceReport.class);
+        String url = BASE_URL + "/create";
+        return restTemplate.postForObject(url, report, AttendanceReport.class);
     }
 
+    // Read
     public AttendanceReport read(String id) {
-        return restTemplate.getForObject(BASE_URL + "/read/" + id, AttendanceReport.class);
+        String url = BASE_URL + "/read/" + id;
+        return restTemplate.getForObject(url, AttendanceReport.class);
     }
 
-    public AttendanceReport update(AttendanceReport report) {
-        restTemplate.put(BASE_URL + "/update", report);
-        return report;
-    }
-
-    public void delete(String id) {
-        restTemplate.delete(BASE_URL + "/delete/" + id);
-    }
-
+    // ✅ Fixed: Return a List instead of array
     public List<AttendanceReport> getAll() {
+        String url = BASE_URL + "/getAll";
         ResponseEntity<AttendanceReport[]> response =
-                restTemplate.getForEntity(BASE_URL + "/all", AttendanceReport[].class);
+                restTemplate.getForEntity(url, AttendanceReport[].class);
         return Arrays.asList(response.getBody());
     }
 }
