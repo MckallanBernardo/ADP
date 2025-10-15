@@ -23,6 +23,7 @@ public class ManageTeacherPanel extends JPanel {
         // === Form Panel (Top) ===
         JPanel form = new JPanel(new GridLayout(4, 2, 10, 10));
         idField = new JTextField();
+
         firstNameField = new JTextField();
         lastNameField = new JTextField();
         subjectField = new JTextField();
@@ -63,7 +64,10 @@ public class ManageTeacherPanel extends JPanel {
         addBtn.addActionListener(e -> addTeacher());
         updateBtn.addActionListener(e -> updateTeacher());
         deleteBtn.addActionListener(e -> deleteTeacher());
-        refreshBtn.addActionListener(e -> loadTable());
+        refreshBtn.addActionListener(e -> {
+            loadTable();
+            clearFields(); // 🧹 Clear input fields when Refresh is clicked
+        });
 
         // Populate fields when selecting a row
         table.getSelectionModel().addListSelectionListener(e -> {
@@ -120,23 +124,42 @@ public class ManageTeacherPanel extends JPanel {
 
     // === Update Teacher ===
     private void updateTeacher() {
-        String id = idField.getText().trim();
+        int selectedRow = table.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(this, "Select a teacher first");
+            return;
+        }
+
+        // Get the original ID from the selected table row
+        String originalId = table.getValueAt(selectedRow, 0).toString();
+        String enteredId = idField.getText().trim();
         String fn = firstNameField.getText().trim();
         String ln = lastNameField.getText().trim();
         String sub = subjectField.getText().trim();
 
-        if (id.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Select a teacher first");
+        if (enteredId.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Teacher ID cannot be empty");
+            return;
+        }
+
+
+        if (!enteredId.equals(originalId)) {
+            JOptionPane.showMessageDialog(this,
+                    "You cannot change the Teacher ID when updating an entry.",
+                    "Invalid Update",
+                    JOptionPane.WARNING_MESSAGE);
+            idField.setText(originalId); // reset to original
             return;
         }
 
         try {
             Teacher t = new Teacher.Builder()
-                    .setTeacherID(id)
+                    .setTeacherID(originalId)  // keep original ID
                     .setFirstName(fn)
                     .setLastName(ln)
                     .setSubject(sub)
                     .build();
+
             client.update(t);
             loadTable();
             clearFields();
