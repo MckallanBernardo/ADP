@@ -1,42 +1,37 @@
 package za.ac.cput.ui;
 
-import za.ac.cput.client.TeacherClient;
-import za.ac.cput.domain.Teacher;
-import za.ac.cput.factory.TeacherFactory;
+import za.ac.cput.client.StudentClient;
+import za.ac.cput.domain.Student;
+import za.ac.cput.factory.StudentFactory;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
 
-public class ManageTeacherFrame extends JFrame {
-    private final TeacherClient client;
+public class ManageStudentPanel extends JPanel {
+    private final StudentClient client;
     private JTable table;
-    private JTextField idField, firstNameField, lastNameField, subjectField;
+    private JTextField idField, firstNameField, lastNameField;
 
-    public ManageTeacherFrame() {
-        this.client = new TeacherClient();
+    public ManageStudentPanel() {
+        this.client = new StudentClient();
 
-        setTitle("Manage Teachers");
-        setSize(720, 440);
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout(10,10));
 
-        JPanel form = new JPanel(new GridLayout(4,2,10,10));
+        // === Form Panel (Top) ===
+        JPanel form = new JPanel(new GridLayout(3,2,10,10));
         idField = new JTextField();
         firstNameField = new JTextField();
         lastNameField = new JTextField();
-        subjectField = new JTextField();
-        form.add(new JLabel("Teacher ID:"));
+        form.add(new JLabel("Student ID:"));
         form.add(idField);
         form.add(new JLabel("First Name:"));
         form.add(firstNameField);
         form.add(new JLabel("Last Name:"));
         form.add(lastNameField);
-        form.add(new JLabel("Subject:"));
-        form.add(subjectField);
 
+        // === Buttons (Bottom) ===
         JPanel buttons = new JPanel();
         JButton addBtn = new JButton("Add");
         JButton updateBtn = new JButton("Update");
@@ -47,91 +42,110 @@ public class ManageTeacherFrame extends JFrame {
         buttons.add(deleteBtn);
         buttons.add(refreshBtn);
 
-        table = new JTable(new DefaultTableModel(new Object[]{"ID", "First Name", "Last Name", "Subject"}, 0));
+        // === Table (Center) ===
+        table = new JTable(new DefaultTableModel(new Object[]{"ID", "First Name", "Last Name"}, 0));
         JScrollPane scrollPane = new JScrollPane(table);
 
         add(form, BorderLayout.NORTH);
         add(scrollPane, BorderLayout.CENTER);
         add(buttons, BorderLayout.SOUTH);
 
+        // === Load Data ===
         loadTable();
 
-        addBtn.addActionListener(e -> addTeacher());
-        updateBtn.addActionListener(e -> updateTeacher());
-        deleteBtn.addActionListener(e -> deleteTeacher());
+        // === Action Listeners ===
+        addBtn.addActionListener(e -> addStudent());
+        updateBtn.addActionListener(e -> updateStudent());
+        deleteBtn.addActionListener(e -> deleteStudent());
         refreshBtn.addActionListener(e -> loadTable());
 
+        // When selecting a row, populate text fields
         table.getSelectionModel().addListSelectionListener(e -> {
             int row = table.getSelectedRow();
             if (row >= 0) {
                 idField.setText(table.getValueAt(row, 0).toString());
                 firstNameField.setText(table.getValueAt(row, 1).toString());
                 lastNameField.setText(table.getValueAt(row, 2).toString());
-                subjectField.setText(table.getValueAt(row, 3).toString());
             }
         });
     }
 
+    // === Load Table Data ===
     private void loadTable() {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setRowCount(0);
         try {
-            List<Teacher> teachers = client.getAll();
-            for (Teacher t : teachers) {
-                model.addRow(new Object[]{t.getTeacherID(), t.getFirstName(), t.getLastName(), t.getSubject()});
+            List<Student> students = client.getAll();
+            for (Student s : students) {
+                model.addRow(new Object[]{s.getStudentID(), s.getFirstName(), s.getLastName()});
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Failed to load teachers: " + ex.getMessage());
+            JOptionPane.showMessageDialog(this, "Failed to load students: " + ex.getMessage());
         }
     }
 
-    private void addTeacher() {
+    // === Add Student ===
+    private void addStudent() {
         String id = idField.getText().trim();
         String fn = firstNameField.getText().trim();
         String ln = lastNameField.getText().trim();
-        String sub = subjectField.getText().trim();
-        if (id.isEmpty() || fn.isEmpty() || ln.isEmpty() || sub.isEmpty()) {
+        if (id.isEmpty() || fn.isEmpty() || ln.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Fill in all fields");
             return;
         }
         try {
-            Teacher t = TeacherFactory.createTeacher(id, fn, ln, sub);
-            client.create(t);
+            Student s = StudentFactory.createStudent(id, fn, ln);
+            client.create(s);
             loadTable();
+            clearFields();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Create failed: " + ex.getMessage());
         }
     }
 
-    private void updateTeacher() {
+    // === Update Student ===
+    private void updateStudent() {
         String id = idField.getText().trim();
         String fn = firstNameField.getText().trim();
         String ln = lastNameField.getText().trim();
-        String sub = subjectField.getText().trim();
         if (id.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Select a teacher first");
+            JOptionPane.showMessageDialog(this, "Select a student first");
             return;
         }
         try {
-            Teacher t = new Teacher.Builder().setTeacherID(id).setFirstName(fn).setLastName(ln).setSubject(sub).build();
-            client.update(t);
+            Student s = new Student.Builder()
+                    .setStudentID(id)
+                    .setFirstName(fn)
+                    .setLastName(ln)
+                    .build();
+            client.update(s);
             loadTable();
+            clearFields();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Update failed: " + ex.getMessage());
         }
     }
 
-    private void deleteTeacher() {
+    // === Delete Student ===
+    private void deleteStudent() {
         String id = idField.getText().trim();
         if (id.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Select a teacher first");
+            JOptionPane.showMessageDialog(this, "Select a student first");
             return;
         }
         try {
             client.delete(id);
             loadTable();
+            clearFields();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Delete failed: " + ex.getMessage());
         }
+    }
+
+    // === Clear Input Fields ===
+    private void clearFields() {
+        idField.setText("");
+        firstNameField.setText("");
+        lastNameField.setText("");
     }
 }
