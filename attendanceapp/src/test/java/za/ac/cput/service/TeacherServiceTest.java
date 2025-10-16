@@ -1,6 +1,9 @@
 package za.ac.cput.service;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import za.ac.cput.domain.Teacher;
@@ -10,11 +13,17 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
+@TestMethodOrder(MethodOrderer.MethodName.class)
 class TeacherServiceTest {
 
     @Autowired
     private TeacherService teacherService;
-    private Teacher teacher = TeacherFactory.createTeacher("12345", "Aidan", "Coetzee", "Maths");
+    private Teacher teacher;
+
+    @BeforeEach
+    void setUp() {
+        teacher = TeacherFactory.createTeacher("12345", "Aidan", "Coetzee", "Maths");
+    }
 
     @Test
     void create() {

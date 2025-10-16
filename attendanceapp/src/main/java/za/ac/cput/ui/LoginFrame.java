@@ -62,7 +62,10 @@ public class LoginFrame extends JFrame {
         gbc.gridx = 1; gbc.gridy = 1; loginPanel.add(teacherIdField, gbc);
 
         JButton loginBtn = new JButton("Login");
-        gbc.gridx = 1; gbc.gridy = 2; gbc.anchor = GridBagConstraints.EAST;
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.gridwidth = 2;               // span both columns
+        gbc.anchor = GridBagConstraints.CENTER;
         loginPanel.add(loginBtn, gbc);
 
         // ---------- Signup Panel ----------
@@ -96,7 +99,10 @@ public class LoginFrame extends JFrame {
         sgbc.gridx = 1; sgbc.gridy = 3; signupPanel.add(suSubject, sgbc);
 
         JButton signupBtn = new JButton("Create Account");
-        sgbc.gridx = 1; sgbc.gridy = 4; sgbc.anchor = GridBagConstraints.EAST;
+        sgbc.gridx = 0;
+        sgbc.gridy = 4;
+        sgbc.gridwidth = 2;               // span both columns
+        sgbc.anchor = GridBagConstraints.CENTER;
         signupPanel.add(signupBtn, sgbc);
 
         // ---------- Center Layout ----------
