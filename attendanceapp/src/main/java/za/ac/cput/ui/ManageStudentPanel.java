@@ -78,8 +78,10 @@ public class ManageStudentPanel extends JPanel {
         });
 
         refreshBtn.addActionListener(e -> {
-            loadTable();    // reload table data
-            clearFields();  // clear input fields and reset ID editability
+
+            loadTable();
+            clearFields();
+
         });
 
         // When selecting a row, populate text fields
