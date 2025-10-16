@@ -31,7 +31,7 @@ public class LoginFrame extends JFrame {
         header.setFont(new Font("SansSerif", Font.BOLD, 24));
         header.setBorder(BorderFactory.createEmptyBorder(15, 0, 15, 0));
         try {
-            header.setIcon(new ImageIcon(getClass().getResource("/images/login_mock.png")));
+            header.setIcon(new ImageIcon(getClass().getResource("/images/")));
             header.setHorizontalTextPosition(SwingConstants.CENTER);
             header.setVerticalTextPosition(SwingConstants.BOTTOM);
         } catch (Exception ignored) {}
