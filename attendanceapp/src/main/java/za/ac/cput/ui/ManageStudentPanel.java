@@ -54,9 +54,29 @@ public class ManageStudentPanel extends JPanel {
         loadTable();
 
         // === Action Listeners ===
-        addBtn.addActionListener(e -> addStudent());
-        updateBtn.addActionListener(e -> updateStudent());
-        deleteBtn.addActionListener(e -> deleteStudent());
+        addBtn.addActionListener(e -> {
+            // === Added for Update/Delete mode ===
+            idField.setEditable(true); // Allow editing ID in Add mode
+
+            addStudent();
+        });
+
+        updateBtn.addActionListener(e -> {
+            // === Added for Update/Delete mode ===
+            idField.setEditable(false); // Prevent ID changes when updating
+
+            updateStudent();
+            idField.setEditable(true); // Restore editability after update
+        });
+
+        deleteBtn.addActionListener(e -> {
+            // === Added for Update/Delete mode ===
+            idField.setEditable(false); // Prevent ID changes when deleting
+
+            deleteStudent();
+            idField.setEditable(true); // Restore editability after delete
+        });
+
         refreshBtn.addActionListener(e -> loadTable());
 
         // When selecting a row, populate text fields
@@ -66,6 +86,10 @@ public class ManageStudentPanel extends JPanel {
                 idField.setText(table.getValueAt(row, 0).toString());
                 firstNameField.setText(table.getValueAt(row, 1).toString());
                 lastNameField.setText(table.getValueAt(row, 2).toString());
+
+                // === Added for Update/Delete mode ===
+                // Make ID read-only when a record is selected
+                idField.setEditable(false);
             }
         });
     }
@@ -147,5 +171,6 @@ public class ManageStudentPanel extends JPanel {
         idField.setText("");
         firstNameField.setText("");
         lastNameField.setText("");
+        idField.setEditable(true); // === Added for Update/Delete mode === Reset ID field to editable
     }
 }
