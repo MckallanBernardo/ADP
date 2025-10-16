@@ -23,7 +23,6 @@ public class ManageTeacherPanel extends JPanel {
         // === Form Panel (Top) ===
         JPanel form = new JPanel(new GridLayout(4, 2, 10, 10));
         idField = new JTextField();
-
         firstNameField = new JTextField();
         lastNameField = new JTextField();
         subjectField = new JTextField();
@@ -61,15 +60,33 @@ public class ManageTeacherPanel extends JPanel {
         loadTable();
 
         // === Action Listeners ===
-        addBtn.addActionListener(e -> addTeacher());
-        updateBtn.addActionListener(e -> updateTeacher());
-        deleteBtn.addActionListener(e -> deleteTeacher());
-        refreshBtn.addActionListener(e -> {
-            loadTable();
-            clearFields(); // 🧹 Clear input fields when Refresh is clicked
+        addBtn.addActionListener(e -> {
+            // === Added for Update/Delete mode ===
+            idField.setEditable(true); // Allow editing in Add mode
+            addTeacher();
         });
 
-        // Populate fields when selecting a row
+        updateBtn.addActionListener(e -> {
+            // === Added for Update/Delete mode ===
+            idField.setEditable(false); // Prevent changing ID in Update mode
+            updateTeacher();
+            idField.setEditable(true); // Restore after update
+        });
+
+        deleteBtn.addActionListener(e -> {
+            // === Added for Update/Delete mode ===
+            idField.setEditable(false); // Prevent changing ID in Delete mode
+            deleteTeacher();
+            idField.setEditable(true); // Restore after delete
+        });
+
+        // === Fixed Refresh Button ===
+        refreshBtn.addActionListener(e -> {
+            loadTable();       // Reload table data
+            clearFields();     // 🧹 Clear input fields
+        });
+
+        // === Table Row Selection ===
         table.getSelectionModel().addListSelectionListener(e -> {
             int row = table.getSelectedRow();
             if (row >= 0) {
@@ -77,6 +94,9 @@ public class ManageTeacherPanel extends JPanel {
                 firstNameField.setText(table.getValueAt(row, 1).toString());
                 lastNameField.setText(table.getValueAt(row, 2).toString());
                 subjectField.setText(table.getValueAt(row, 3).toString());
+
+                // === Added for Update/Delete mode ===
+                idField.setEditable(false); // Make ID read-only when record selected
             }
         });
     }
@@ -95,6 +115,8 @@ public class ManageTeacherPanel extends JPanel {
                         t.getSubject()
                 });
             }
+
+            clearFields(); //
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Failed to load teachers: " + ex.getMessage());
         }
@@ -124,37 +146,19 @@ public class ManageTeacherPanel extends JPanel {
 
     // === Update Teacher ===
     private void updateTeacher() {
-        int selectedRow = table.getSelectedRow();
-        if (selectedRow < 0) {
-            JOptionPane.showMessageDialog(this, "Select a teacher first");
-            return;
-        }
-
-        // Get the original ID from the selected table row
-        String originalId = table.getValueAt(selectedRow, 0).toString();
-        String enteredId = idField.getText().trim();
+        String id = idField.getText().trim();
         String fn = firstNameField.getText().trim();
         String ln = lastNameField.getText().trim();
         String sub = subjectField.getText().trim();
 
-        if (enteredId.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Teacher ID cannot be empty");
-            return;
-        }
-
-
-        if (!enteredId.equals(originalId)) {
-            JOptionPane.showMessageDialog(this,
-                    "You cannot change the Teacher ID when updating an entry.",
-                    "Invalid Update",
-                    JOptionPane.WARNING_MESSAGE);
-            idField.setText(originalId); // reset to original
+        if (id.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Select a teacher first");
             return;
         }
 
         try {
             Teacher t = new Teacher.Builder()
-                    .setTeacherID(originalId)  // keep original ID
+                    .setTeacherID(id)
                     .setFirstName(fn)
                     .setLastName(ln)
                     .setSubject(sub)
@@ -191,5 +195,7 @@ public class ManageTeacherPanel extends JPanel {
         firstNameField.setText("");
         lastNameField.setText("");
         subjectField.setText("");
-    }
+        idField.setEditable(true);
+        table.clearSelection();
+  }
 }
