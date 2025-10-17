@@ -77,7 +77,12 @@ public class ManageStudentPanel extends JPanel {
             idField.setEditable(true); // Restore editability after delete
         });
 
-        refreshBtn.addActionListener(e -> loadTable());
+        refreshBtn.addActionListener(e -> {
+
+            loadTable();
+            clearFields();
+
+        });
 
         // When selecting a row, populate text fields
         table.getSelectionModel().addListSelectionListener(e -> {
