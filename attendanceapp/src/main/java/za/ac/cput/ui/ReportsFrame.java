@@ -28,6 +28,8 @@ public class ReportsFrame extends JFrame {
     private JTable table;
     private JLabel totalsLabel;
 
+    int totalPresent = 0, totalAbsent = 0;
+
     // keep last loaded records for saving
     private List<AttendanceRecord> currentRecords;
 
@@ -118,14 +120,14 @@ public class ReportsFrame extends JFrame {
             DefaultTableModel m = (DefaultTableModel) table.getModel();
             m.setRowCount(0);
 
-            int present = 0, absent = 0;
+
             for (AttendanceRecord r : currentRecords) {
                 m.addRow(new Object[]{r.getDate(), r.getStatus()});
-                if ("Present".equalsIgnoreCase(r.getStatus())) present++;
-                else if ("Absent".equalsIgnoreCase(r.getStatus())) absent++;
+                if ("Present".equalsIgnoreCase(r.getStatus())) totalPresent++;
+                else if ("Absent".equalsIgnoreCase(r.getStatus())) totalAbsent++;
             }
             table.setModel(m);
-            totalsLabel.setText("Total Present: " + present + "   Total Absent: " + absent);
+            totalsLabel.setText("Total Present: " + totalPresent + "   Total Absent: " + totalAbsent);
 
             // enable save only if we have something
             saveBtn.setEnabled(!currentRecords.isEmpty());
@@ -156,6 +158,8 @@ public class ReportsFrame extends JFrame {
                     .setRecords(currentRecords) // entity will re-filter by date range internally
                     .setStartDate(start)
                     .setEndDate(end)
+                    .setTotalPresent(totalPresent)
+                    .setTotalAbsent(totalAbsent)
                     .build();
 
             AttendanceReport saved = reportClient.create(report);

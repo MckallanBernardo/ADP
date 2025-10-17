@@ -11,8 +11,8 @@ public class AttendanceReport {
     private String reportID;
     private LocalDate startDate;
     private LocalDate endDate;
-    private int totalDaysPresent;
-    private int totalDaysAbsent;
+    private int totalPresent;
+    private int totalAbsent;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AttendanceRecord> records;
@@ -24,8 +24,8 @@ public class AttendanceReport {
         this.startDate = builder.startDate;
         this.endDate = builder.endDate;
         this.records = builder.records;
-        this.totalDaysPresent = builder.totalDaysPresent;
-        this.totalDaysAbsent = builder.totalDaysAbsent;
+        this.totalPresent = builder.totalPresent;
+        this.totalAbsent = builder.totalAbsent;
     }
 
     public String getReportID() {
@@ -44,12 +44,12 @@ public class AttendanceReport {
         return records;
     }
 
-    public int getTotalDaysPresent() {
-        return totalDaysPresent;
+    public int getTotalPresent() {
+        return totalPresent;
     }
 
-    public int getTotalDaysAbsent() {
-        return totalDaysAbsent;
+    public int getTotalAbsent() {
+        return totalAbsent;
     }
 
     // ✅ Builder pattern (unchanged, minimal updates only)
@@ -58,8 +58,8 @@ public class AttendanceReport {
         private LocalDate startDate;
         private LocalDate endDate;
         private List<AttendanceRecord> records;
-        private int totalDaysPresent;
-        private int totalDaysAbsent;
+        private int totalPresent;
+        private int totalAbsent;
 
         public Builder setReportID(String reportID) {
             this.reportID = reportID;
@@ -81,13 +81,13 @@ public class AttendanceReport {
             return this;
         }
 
-        public Builder setTotalDaysPresent(int totalDaysPresent) {
-            this.totalDaysPresent = totalDaysPresent;
+        public Builder setTotalPresent(int totalPresent) {
+            this.totalPresent = totalPresent;
             return this;
         }
 
-        public Builder setTotalDaysAbsent(int totalDaysAbsent) {
-            this.totalDaysAbsent = totalDaysAbsent;
+        public Builder setTotalAbsent(int totalAbsent) {
+            this.totalAbsent = totalAbsent;
             return this;
         }
 
