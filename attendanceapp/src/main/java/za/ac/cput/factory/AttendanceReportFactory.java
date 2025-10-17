@@ -10,7 +10,7 @@ import java.util.List;
 public class AttendanceReportFactory {
 
     public static AttendanceReport createAttendanceReport(String reportID, List<AttendanceRecord> records,
-                                                          LocalDate startDate, LocalDate endDate) {
+                                                          LocalDate startDate, LocalDate endDate, int totalPresent, int totalAbsent) {
         if (Helper.isNullOrEmpty(reportID))
             throw new IllegalArgumentException("Report ID cannot be null or empty.");
 
@@ -28,6 +28,8 @@ public class AttendanceReportFactory {
                 .setRecords(new java.util.ArrayList<>(records))
                 .setStartDate(startDate)
                 .setEndDate(endDate)
+                .setTotalPresent(totalPresent)
+                .setTotalAbsent(totalAbsent)
                 .build();
     }
 }
